@@ -1,0 +1,20 @@
+package com.revature.screens;
+
+import java.util.Scanner;
+
+import com.revature.daos.UserDao;
+
+public class AdminScreen implements Screen {
+	private Scanner scan = new Scanner(System.in);
+	private UserDao ud = UserDao.currentUserDao;
+
+	@Override
+	public Screen start() {
+	
+		System.out.println("Welcome to admin mode!");
+		System.out.println("Enter the username of the account you would like to view: ");
+		
+		return this;
+	}
+
+}

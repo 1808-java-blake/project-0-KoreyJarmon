@@ -1,0 +1,44 @@
+package com.revature.screens;
+
+import java.util.Scanner;
+
+import com.revature.daos.User;
+import com.revature.daos.UserDao;
+
+public class RegisterUserScreen implements Screen {
+	private Scanner scan = new Scanner(System.in);
+	private UserDao ud = UserDao.currentUserDao;
+
+	@Override
+	public Screen start() {
+		User u = new User();
+		System.out.println("Enter new username: ");
+		u.setUsername(scan.nextLine());
+		System.out.println("Enter password");
+		u.setPassword(scan.nextLine());
+		System.out.println("Enter first name");
+		u.setFirstname(scan.nextLine());
+		System.out.println("Enter last name");
+		u.setLastname(scan.nextLine());
+		System.out.println("Create your pin: ");
+		int pin = Integer.valueOf(scan.nextLine());
+		while(pin/1000 > 10) {
+			System.out.println("Invalid input. Pin should not exceed 4 numbers. Try again: ");
+			pin = scan.nextInt();
+		}
+		u.createPin(pin);
+		System.out.println("Enter starting balance: " + u.checkPin(0));
+		u.setBalance(scan.nextInt());
+		ud.createUser(u);
+		
+//		try {
+//		u.setBalance(Integer.valueOf(balance));
+//		ud.createUser(u);
+//		} catch(NumberFormatException e) {
+//			System.out.println("Invalid Number");
+//		}
+		
+		return new LoginScreen();
+	}
+
+}
