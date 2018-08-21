@@ -1,0 +1,137 @@
+package com.revature.daos;
+
+public class User {
+
+	private int id;
+	private String username;
+	private String password;
+	private String firstname;
+	private String lastname;
+	private String transactions = "";
+	private int cbalance;
+	private int sbalance;
+	private int pin;
+	private int amount;
+
+	public User() {
+		super();
+	}
+
+	public User(String username, String password, String firstname, String lastname, int cbalance, int sbalance,
+			int pin) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.cbalance = cbalance;
+		this.sbalance = sbalance;
+		this.pin = pin;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public int getSBalance() {
+		return sbalance;
+	}
+
+	public int getCBalance() {
+		return cbalance;
+	}
+
+	public void setSBalance(int bal) {
+		setAmount(bal);
+		this.sbalance = bal;
+	}
+
+	public void setCBalance(int bal) {
+		setAmount(bal);
+		this.cbalance = bal;
+	}
+
+	public void withdrawFromChecking(int change) {
+		setAmount(change);
+		this.cbalance = cbalance - change;
+	}
+
+	public void depositIntoChecking(int change) {
+		setAmount(change);
+		this.cbalance = cbalance + change;
+	}
+
+	public void withdrawFromSavings(int change) {
+		setAmount(change);
+		this.sbalance = sbalance - change;
+	}
+
+	public void depositIntoSaving(int change) {
+		setAmount(change);
+		this.sbalance = sbalance + change;
+	}
+
+	public void createPin(int pin) {
+		this.pin = pin;
+	}
+
+	public int checkPin() {
+		return this.pin;
+	}
+	
+	public void setTransactions(String type) {
+		if (type.equals("d"))
+			transactions = "deposit";
+		else
+			transactions = "withdraw";
+	}
+
+	public String getTransactions() {
+		return transactions;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+}

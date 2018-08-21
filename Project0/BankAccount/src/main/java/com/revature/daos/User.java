@@ -1,22 +1,24 @@
 package com.revature.daos;
 
-import java.io.Serializable;
+public class User {
 
-public class User implements Serializable {
+	private int id;
 	private String username;
 	private String password;
 	private String firstname;
 	private String lastname;
-	private String transactions = "";
+	private String checkings ="";
 	private int cbalance;
 	private int sbalance;
 	private int pin;
+	private String savings ="";
 
 	public User() {
 		super();
 	}
 
-	public User(String username, String password, String firstname, String lastname, int cbalance, int sbalance, int pin) {
+	public User(String username, String password, String firstname, String lastname, int cbalance, int sbalance,
+			int pin) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -62,7 +64,7 @@ public class User implements Serializable {
 	public int getSBalance() {
 		return sbalance;
 	}
-	
+
 	public int getCBalance() {
 		return cbalance;
 	}
@@ -70,13 +72,13 @@ public class User implements Serializable {
 	public void setSBalance(int bal) {
 		this.sbalance = bal;
 	}
-	
+
 	public void setCBalance(int bal) {
 		this.cbalance = bal;
 	}
-	
+
 	public void withdrawFromChecking(int change) {
-			this.cbalance = cbalance - change;
+		this.cbalance = cbalance - change;
 	}
 
 	public void depositIntoChecking(int change) {
@@ -84,7 +86,7 @@ public class User implements Serializable {
 	}
 
 	public void withdrawFromSavings(int change) {
-			this.sbalance = sbalance - change;
+		this.sbalance = sbalance - change;
 	}
 
 	public void depositIntoSaving(int change) {
@@ -98,68 +100,29 @@ public class User implements Serializable {
 	public int checkPin() {
 		return this.pin;
 	}
-	
-	public String getTransactions() {
-		return transactions;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setTransactions(String transactions) {
-		this.transactions = this.transactions + transactions + "\n";
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + cbalance;
-		result = prime * result + sbalance;
-		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
-		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+	public String getCheckings() {
+		return checkings;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (cbalance != other.cbalance)
-			return false;
-		if (sbalance != other.sbalance)
-			return false;
-		if (firstname == null) {
-			if (other.firstname != null)
-				return false;
-		} else if (!firstname.equals(other.firstname))
-			return false;
-		if (lastname == null) {
-			if (other.lastname != null)
-				return false;
-		} else if (!lastname.equals(other.lastname))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+	public void setCheckings(String sign, int checkings) {
+		this.checkings = sign + checkings;
 	}
 
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", cbalance=" + cbalance + "sbalance=" + sbalance + "]";
+	public String getSavings() {
+		return savings;
+	}
+
+	public void setSavings(String sign, int savings) {
+		this.savings = sign + savings;
 	}
 
 }

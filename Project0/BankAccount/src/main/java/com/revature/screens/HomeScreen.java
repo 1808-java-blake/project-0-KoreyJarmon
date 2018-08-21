@@ -15,13 +15,14 @@ public class HomeScreen implements Screen {
 	private int pin = 10000;
 	int w;
 	int d;
+	int b = 0;
 
 	public Screen start() {
 		u = cu.getUser();
 		if (ch == false) {
 			System.out.println("Enter pin in otder to access bank features: ");
 			pin = Integer.valueOf(scan.nextLine());
-			while (pin != u.checkPin()) {
+			while (pin != ud.checkPin(u.getUsername(), u.getPassword(),pin)) {
 				System.out.println("Invalid input. Try again: ");
 				pin = Integer.valueOf(scan.nextLine());
 			}
@@ -42,10 +43,8 @@ public class HomeScreen implements Screen {
 			choice = scan.nextLine();
 			if (choice.equalsIgnoreCase("c")) {
 				System.out.println("Your balance is: " + u.getCBalance());
-				u.setTransactions("Checked checking account balance.");
 			} else if (choice.equalsIgnoreCase("s")) {
 				System.out.println("Your balance is: " + u.getSBalance());
-				u.setTransactions("Checked saving account balance.");
 			} else {
 				System.out.println("Invalid input, returning to main menu");
 				break;
@@ -59,12 +58,16 @@ public class HomeScreen implements Screen {
 				System.out.println("Enter the amount you wish to deposit:");
 				d = Integer.valueOf(scan.nextLine());
 				u.depositIntoChecking(d);
-				u.setTransactions("deposited " + d + " into your checking account.");
+				u.setCheckings("+",d);
+				u.setSavings("", 0);
+				ud.setTransactions(u);
 			} else if (choice.equalsIgnoreCase("s")) {
 				System.out.println("Enter the amount you wish to deposit:");
 				d = Integer.valueOf(scan.nextLine());
 				u.depositIntoSaving(d);
-				u.setTransactions("deposited " + d + " into your saving account.");
+				u.setSavings("+",d);
+				u.setCheckings("", 0);
+				ud.setTransactions(u);
 			} else
 				System.out.println("Invalid input, returning to main menu");
 			ud.updateUser(u);
@@ -79,7 +82,9 @@ public class HomeScreen implements Screen {
 					System.out.println("Insufficient funds. RIP ");
 				else {
 					u.withdrawFromChecking(w);
-					u.setTransactions("withdrew " + w + " from your checking account.");
+					u.setCheckings("-",w);
+					u.setSavings("", 0);
+					ud.setTransactions(u);
 				}
 			} else if (choice.equalsIgnoreCase("s")) {
 				System.out.println("Enter the amount you wish to withdraw:");
@@ -88,14 +93,16 @@ public class HomeScreen implements Screen {
 					System.out.println("Insufficient funds. RIP ");
 				else {
 					u.withdrawFromSavings(w);
-					u.setTransactions("withdrew " + w + " from your saving account.");
+					u.setSavings("-",w);
+					u.setCheckings("", 0);
+					ud.setTransactions(u);
 				}
 			} else
 				System.out.println("Invalid input, returning to main menu");
 			ud.updateUser(u);
 			break;
 		case "4":
-			System.out.println("Transaction history: " + "\n" + u.getTransactions());
+			System.out.println("Transaction history: " + "\n" + ud.getTransactions(u));
 			break;
 		case "5":
 			return new LoginScreen();

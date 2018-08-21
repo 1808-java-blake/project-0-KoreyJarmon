@@ -1,0 +1,21 @@
+package com.revature.util;
+
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.util.Properties;
+
+public class ConnectionUtil {
+	public statc final ConnectionUtil cu = new ConnectionUtil();
+	
+	private ConnectionUtil() {
+		Properties dbProps = new Properties();
+		dbProps.load(new FileInputStream("/src/main/resources/database.properties"));
+		 
+	}
+	 public Connection getConnection() {
+		 Properties dbProps = new Properties();
+		 dbProps.load(new FileInputStream("/src/main/resources/database.properties"));
+		 
+		 return null;
+	 }
+}

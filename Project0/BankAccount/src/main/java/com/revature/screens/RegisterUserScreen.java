@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.revature.daos.User;
 import com.revature.daos.UserDao;
+import com.revature.daos.current;
 
 public class RegisterUserScreen implements Screen {
 	private Scanner scan = new Scanner(System.in);
@@ -12,9 +13,9 @@ public class RegisterUserScreen implements Screen {
 	@Override
 	public Screen start() {
 		User u = new User();
-		System.out.println("Enter new username: ");
+		System.out.println("Create a username: ");
 		u.setUsername(scan.nextLine());
-		System.out.println("Enter password");
+		System.out.println("Create a password");
 		u.setPassword(scan.nextLine());
 		System.out.println("Enter first name");
 		u.setFirstname(scan.nextLine());
@@ -28,25 +29,28 @@ public class RegisterUserScreen implements Screen {
 		}
 		u.createPin(pin);
 		System.out.println("Enter starting balance of checking account: ");
-		u.setCBalance(Integer.valueOf(scan.nextLine()));
+		int c = Integer.valueOf(scan.nextLine());
+		u.setCBalance(Integer.valueOf(c));
+		u.setCheckings("+", c);
+		u.setSavings("", 0);
+		ud.setTransactions(u);
 		System.out.println("Would you like to start a savings account? Enter y or n: ");
 		String choice = scan.nextLine();
 		if(choice.equalsIgnoreCase("y")) {
 			System.out.println("Enter starting balance: ");
-			u.setSBalance(scan.nextInt());
+			c = Integer.valueOf(scan.nextLine());
+			u.setSBalance(c);
+			u.setSavings("+", c);
+			u.setCheckings("", 0);
+			ud.setTransactions(u);
 		}
 		else
 			u.setSBalance(0);
+		current cu = new current();
+		cu.cUser(u);
 		ud.createUser(u);
-		u.setTransactions("Account created.");
+		ud.setTransactions(u);
 		ud.updateUser(u);
-		
-//		try {
-//		u.setBalance(Integer.valueOf(balance));
-//		ud.createUser(u);
-//		} catch(NumberFormatException e) {
-//			System.out.println("Invalid Number");
-//		}
 		
 		return new LoginScreen();
 	}

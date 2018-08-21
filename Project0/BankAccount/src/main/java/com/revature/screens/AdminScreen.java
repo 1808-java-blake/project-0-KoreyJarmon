@@ -36,7 +36,7 @@ public class AdminScreen implements Screen {
 				cu.cUser(currentUser);
 
 				if (currentUser != null) {
-					System.out.println(currentUser.getTransactions());
+					System.out.println(ud.getTransactions(currentUser));
 				}
 				break;
 			case "2":

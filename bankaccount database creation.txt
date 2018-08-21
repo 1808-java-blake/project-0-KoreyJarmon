@@ -1,0 +1,18 @@
+CREATE table bankaccount(
+	username VARCHAR(50),
+	password VARCHAR(50),
+	firstName VARCHAR(50),
+	lastName VARCHAR(50),
+	checkingsBalance INT,	
+	savingsBalance INT,
+	pin INT,
+	userid SERIAL
+);
+
+CREATE table transactions(
+	transaction_id SERIAL,
+	userid INT,
+	checkings VARCHAR(),
+	savings VARCHAR()
+);
+
